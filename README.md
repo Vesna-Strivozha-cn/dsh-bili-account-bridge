@@ -4,7 +4,7 @@
 
 它不是"第三个 B站 插件"，而是这两个插件中间的一层：登录态在这里对齐，能不能动手在这里开关，该不该回在这里打分，谁来回在这里抢单。
 
-> **制作通告 / Made with DSH**：本插件的代码在 **DeepSeek Harness（DSH）** 会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出，源文件头部带同一句声明；MIT 许可，按现状提供、不附担保。
+> **制作通告 / Made with DSH**：本插件的代码在 **DeepSeek Harness（DSH）** 会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出，源文件头部带同一句声明；**PolyForm Noncommercial 1.0.0** 许可——自用、学习、改、分享都行，公网发布也允许，但**商业用途要另外授权**；按现状提供、不附担保。
 > This plugin's code was produced in a **DeepSeek Harness（DSH）** session by an AI assistant working with the author; the same notice sits at the top of the source files.
 
 ## 安装
@@ -192,3 +192,19 @@ dsh plugin add github:Vesna-Strivozha-cn/dsh-bili-account-bridge
 - 唯一的外网请求是 `/x/web-interface/nav` 登录态校验（同一份 cookie 5 分钟内复用），不抓页面、不轮询内容接口。
 - 覆盖前一定备份；不同 uid 一律不写，等主人定夺。
 - 这是本地桌面工具，不对外提供网络服务，不涉及 ICP 备案；所有动作都在 B站 正常接口与频率范围内，不做高频请求、不绕过风控。
+
+## 许可
+
+本插件按 **PolyForm Noncommercial License 1.0.0** 发布（SPDX：`PolyForm-Noncommercial-1.0.0`），全文见仓库根目录的 [LICENSE](LICENSE)。
+
+| 用途 | 允许？ |
+|---|---|
+| 自己装来用、学习、研究、改代码、给朋友用 | ✅ 随便 |
+| 把改过的版本发到论坛 / 自己的仓 / 插件目录（非商业） | ✅ 可以，保留版权声明与许可文本 |
+| 卖钱、付费代配置、企业内当作生产工具对外经营、拿它做带广告或订阅的产品 | ❌ 需要单独的商业授权 |
+| 二次打包后闭源收费分发 | ❌ 不允许 |
+
+商业授权联系作者：https://github.com/Vesna-Strivozha-cn 。
+
+> 说明：这不是 OSI 认可的开源许可，属于「源码可见、非商业可用」（source-available）。代码照样公开、照样能改，只是不能拿去赚钱。
+> 许可只约束代码的使用方式，不代表 B站 的接口授权；使用本插件时仍须遵守 B站 的用户协议与社区规则。
