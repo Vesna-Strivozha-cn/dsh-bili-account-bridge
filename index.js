@@ -1,3 +1,7 @@
+/**
+ * dsh-bili-account-bridge（B站桥）—— 制作通告：
+ * 本文件在 DeepSeek Harness（DSH）会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出。
+ */
 import { resolvePaths } from './lib/paths.mjs'
 import { createReconciler } from './lib/reconciler.mjs'
 import { loadConfig, saveConfig, patchConfig } from './lib/config.mjs'

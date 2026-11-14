@@ -4,6 +4,9 @@
 
 它不是"第三个 B站 插件"，而是这两个插件中间的一层：登录态在这里对齐，能不能动手在这里开关，该不该回在这里打分，谁来回在这里抢单。
 
+> **制作通告 / Made with DSH**：本插件的代码在 **DeepSeek Harness（DSH）** 会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出，源文件头部带同一句声明；MIT 许可，按现状提供、不附担保。
+> This plugin's code was produced in a **DeepSeek Harness（DSH）** session by an AI assistant working with the author; the same notice sits at the top of the source files.
+
 ## 安装
 
 ```bash

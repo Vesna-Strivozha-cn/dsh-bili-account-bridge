@@ -2,6 +2,7 @@
  * dsh-bili-account-bridge —— 客户端半边：DSH「设置」里的「B站桥」。
  * 三块内容：登录态桥（原样保留）、插件闸门、文本分流。
  * 数据来自 /dsh-bili-bridge/api/*（同源 fetch），与 host 半端是同一份状态。
+ * 制作通告：本文件在 DeepSeek Harness（DSH）会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出。
  */
 window.__ModuleLoader__.load({
   id: "dsh-bili-account-bridge",
