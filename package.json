@@ -1,6 +1,6 @@
 {
   "name": "dsh-bili-account-bridge",
-  "version": "0.326",
+  "version": "0.325",
   "description": "B站桥：让 dsh-bili-whale（养鱼）与 dsh-dafeiyu-life（大肥鱼）共用一份登录态；收到文本先在插件内打分定倾向（偏养鱼的归养鱼，其余归大肥鱼），再按闸门决定谁回，两边不抢同一句。",
   "type": "module",
   "main": "index.js",
