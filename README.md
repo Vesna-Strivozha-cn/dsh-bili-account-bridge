@@ -1,4 +1,4 @@
-# dsh-bili-account-bridge（B站桥）· 0.325
+# dsh-bili-account-bridge（B站桥）· 0.3.25
 
 一份 B站 登录态，给 **养鱼**（dsh-bili-whale）和 **大肥鱼**（dsh-dafeiyu-life）共用；一句前置判断，决定收到的这句话**要不要回、由谁回**。
 
