@@ -105,6 +105,22 @@ dsh plugin add github:Vesna-Strivozha-cn/dsh-bili-account-bridge
 
 （2026-11-15 修：此前公开评论也走同一道拦截，非主人评论被判 `not-owner`、带养鱼动词的被判 `other-side`，大肥鱼的正常评论回复被整片卡住。）
 
+### 两块插件各自的闸门（判定对照）
+
+| 场景 | 养鱼（dsh-bili-whale） | 大肥鱼（dsh-dafeiyu-life） |
+|---|---|---|
+| 私信 | `gateIncoming`：not-owner → 词库归属 → `gates.whale.action` | `gateIncoming`：not-owner → 词库归属 → `gates.dafeiyu.reply` |
+| 主人评论 / 回复通知 | 同一套 `gateIncoming`（`listen.ownerOnly` 只盯主人） | 公开评论专用闸：只看 `gates.dafeiyu.reply` + 分流规则，不按「是不是主人」「判给谁」拦 |
+| 观众评论 | 不在监听范围（ownerOnly），轮不到闸门 | 照常回；只有闸门关才 `gate-closed:dafeiyu.reply` |
+| 判给对面那一侧 | 让路：`other-side:<side>` | 只有**命中分流规则且 target 不是大肥鱼**才让路：`routed:whale`；其余照常，谁先抢到谁回 |
+| 同一条两边都想回 | `claim()` 按 rpid 抢单 | 同左 |
+
+对照结论（2026-11-15）：
+
+- 养鱼的 `not-owner` 是**监听范围**（只服务主人），不是词库硬拦，和「词库只给倾向」不冲突；
+- 大肥鱼的公开评论不套 `not-owner` / `other-side`——评论区本来就是回陌生人的地方，套上去会把正常观众全挡掉（就是这次的故障）；
+- 分流规则是主人显式指定的走向，对两侧都生效：规则指名养鱼时大肥鱼不抢，指名大肥鱼时养鱼让路。
+
 ---
 
 ## 四、文本分流（这条消息给谁）
