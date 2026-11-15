@@ -1,23 +1,39 @@
-# dsh-bili-account-bridge（B站桥）· 0.1.4
+# dsh-bili-account-bridge（B站桥）· 0.1.5
 
-一份 B站 登录态，给 **养鱼**（dsh-bili-whale）和 **大肥鱼**（dsh-dafeiyu-life）共用；一句前置判断，决定收到的这句话**要不要回、由谁回**。
+**一份 B站 登录态，两个插件共用；一句话进来，先判归谁，再判能不能动。**
 
-它不是"第三个 B站 插件"，而是这两个插件中间的一层：登录态在这里对齐，能不能动手在这里开关，该不该回在这里打分，谁来回在这里抢单。
+养鱼（`dsh-bili-whale`）和大肥鱼（`dsh-dafeiyu-life`）各自都是完整的 B站 助手。单独跑都正常，凑在一台机器上就开始互相顶号、抢同一句回复、回一堆不该回的话。这层桥只解决这三件事，而且只在本地动文件：登录态对齐成一份、动作交给闸门开关、同一句只回一次。
 
-> **制作通告 / Made with DSH**：本插件的代码在 **DeepSeek Harness（DSH）** 会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出，源文件头部带同一句声明；**PolyForm Noncommercial 1.0.0** 许可——自用、学习、改、分享都行，公网发布也允许，但**商业用途要另外授权**；按现状提供、不附担保。
-> This plugin's code was produced in a **DeepSeek Harness（DSH）** session by an AI assistant working with the author; the same notice sits at the top of the source files.
+> 它不是「第三个 B站 插件」，是那两个插件之间的一层。装它不会让你多一个 B站 账号，也不会多一个会说话的角色。
 
-## 安装
+| 你遇到的现象 | 桥怎么处理 |
+|---|---|
+| 一边重新扫码，另一边就失效，看上去像「账号被顶替」 | 账号对齐：同 uid 以较新的那份为准原子覆盖，覆盖前备份；不同 uid 一个字节都不写，只报冲突等你定夺 |
+| 什么消息都往会话里灌，回了一堆废话 | 判定词库：先给这句话打分定归属（偏养鱼还是偏大肥鱼），分数只决定「谁更像」，不决定拦不拦 |
+| 同一条消息两边都想回 | 互斥抢单：按 rpid / 归一文本抢，谁先抢到谁回，另一方整条跳过 |
+| 某一侧这会儿该安静 | 插件闸门：总开关 + 两侧各两个开关（行为处理 / 正常回复），关了就真的不动 |
+
+四者串起来才是完整的一道闸：**词库判归属 → 闸门判放行 → 抢单判归属到谁**。任何一处都没有「硬拦陌生人」的逻辑，评论区照常回，不按词库把人挡在外面。
+
+## 三十秒上手
 
 ```bash
-# 从 npm（带版本号，插件市场的目录也只认这条路径）
+# npm（带版本号；插件市场的目录也只认这条路径）
 dsh plugin add dsh-bili-account-bridge
 
-# 或者直接从 GitHub 源码（等价）
+# 或者直接装 GitHub 源码，等价
 dsh plugin add github:Vesna-Strivozha-cn/dsh-bili-account-bridge
 ```
 
-纯 JS、没有构建步骤、没有安装期脚本。被桥接的两个插件是可选的：只装一个也能跑（只是没有另一侧可对齐、可抢单）。
+1. 装完重启 DSH，左侧栏会出现「**B站桥**」；点开第一屏就是登录态现状。
+2. 两份 cookie 属于同一个 uid → 什么都不用做，它已经对齐了；不同 uid → 会显示冲突，用 `bili_bridge_adopt` 定一个。
+3. 想让某一侧暂停：设置 → B站桥 → 插件闸门，关掉对应开关即可，另一侧照常。
+4. 想让它认得主人的说话习惯：在「判定词库」里加词（至少两个字），加一个词就是按 1 计分。
+
+被桥接的两个插件都是**可选**的：只装一个也能跑，只是没有另一侧可对齐、可抢单。
+
+> **制作通告 / Made with DSH**：本插件的代码在 **DeepSeek Harness（DSH）** 会话中由 AI 助手与作者 Vesna-Strivozha-cn 协作产出，源文件头部带同一句声明；**PolyForm Noncommercial 1.0.0** 许可——自用、学习、改、分享都行，公网发布也允许，但**商业用途要另外授权**；按现状提供、不附担保。
+> This plugin's code was produced in a **DeepSeek Harness（DSH）** session by an AI assistant working with the author; the same notice sits at the top of the source files.
 
 ## 它管四件事
 
@@ -27,8 +43,6 @@ dsh plugin add github:Vesna-Strivozha-cn/dsh-bili-account-bridge
 | 2 | 什么消息都往会话里灌，回一堆废话 | 判定词库打分（回复判定） | `gate-lexicon.json` |
 | 3 | 同一条消息两个插件都想回 | 互斥抢单 | `bili-reply-claims.json` |
 | 4 | 某一侧该静默时还在动 | 插件闸门 + 文本分流 | `config.json` |
-
----
 
 ## 一、账号对齐（不再互相顶替）
 
