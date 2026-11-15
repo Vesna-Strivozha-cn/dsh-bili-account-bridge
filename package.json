@@ -1,7 +1,7 @@
 {
   "name": "dsh-bili-account-bridge",
-  "version": "0.1.4",
-  "description": "B站桥：让 dsh-bili-whale（养鱼）与 dsh-dafeiyu-life（大肥鱼）共用一份登录态；收到文本先在插件内打分定倾向（偏养鱼的归养鱼，其余归大肥鱼），再按闸门决定谁回，两边不抢同一句。",
+  "version": "0.1.5",
+  "description": "B站桥：养鱼（dsh-bili-whale）与大肥鱼（dsh-dafeiyu-life）共用一份 B站 登录态；每条消息先按共享词库定归属，再由两侧闸门决定谁动、谁静默，同一句只回一次。",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -15,7 +15,8 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "assets"
+    "assets",
+    "LICENSE"
   ],
   "keywords": [
     "dsh",
@@ -56,5 +57,8 @@
       "platform": "web",
       "inject": []
     }
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
