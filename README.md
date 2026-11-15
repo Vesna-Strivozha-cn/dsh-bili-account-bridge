@@ -10,6 +10,10 @@
 ## 安装
 
 ```bash
+# 从 npm（带版本号，插件市场的目录也只认这条路径）
+dsh plugin add dsh-bili-account-bridge
+
+# 或者直接从 GitHub 源码（等价）
 dsh plugin add github:Vesna-Strivozha-cn/dsh-bili-account-bridge
 ```
 
